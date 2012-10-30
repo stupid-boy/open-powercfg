@@ -1,6 +1,0 @@
-D:\TEMP\open-PowerCfg\External\Aga.Controls\Bin\Release\Aga.Controls.dll
-D:\TEMP\open-PowerCfg\External\Aga.Controls\obj\Release\ResolveAssemblyReference.cache
-D:\TEMP\open-PowerCfg\External\Aga.Controls\obj\Release\Aga.Controls.Properties.Resources.resources
-D:\TEMP\open-PowerCfg\External\Aga.Controls\obj\Release\Aga.Controls.Tree.TreeViewAdv.resources
-D:\TEMP\open-PowerCfg\External\Aga.Controls\obj\Release\Aga.Controls.csproj.GenerateResource.Cache
-D:\TEMP\open-PowerCfg\External\Aga.Controls\obj\Release\Aga.Controls.dll
