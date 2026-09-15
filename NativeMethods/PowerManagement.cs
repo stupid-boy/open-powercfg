@@ -1030,6 +1030,8 @@ namespace OpenPowerCfg.PowerManagement
                     }
                     else
                         return String.Empty;
+                } else if (returnCode == 2) {
+                    return new String("NOT FOUND");
                 }
 
             }
@@ -1046,7 +1048,7 @@ namespace OpenPowerCfg.PowerManagement
             }
             if (returnCode != 0)
             {
-                throw new PowerManagerException(PowerManagementResource.Win32ErrorCodeMessage
+                throw new PowerManagerException("error" // PowerManagementResource.Win32ErrorCodeMessage
                 + returnCode.ToString(CultureInfo.InvariantCulture));
             }
             return String.Empty;

@@ -99,7 +99,11 @@ namespace OpenPowerCfg.GUI
                     Guid subGroupGuid = (Guid)Marshal.PtrToStructure(
                         subGroupGuidPtr, typeof(Guid));
 
-                    childs.Add(new SubGroupNode(powerSchemeGuid, subGroupGuid, settings));
+                    SubGroupNode node = new SubGroupNode(powerSchemeGuid, subGroupGuid, settings);
+                    if(node.isValid())
+                    {
+                        childs.Add(new SubGroupNode(powerSchemeGuid, subGroupGuid, settings));
+                    }
 
                     groupIndex++;
                 }

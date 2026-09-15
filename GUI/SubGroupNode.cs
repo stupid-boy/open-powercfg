@@ -28,6 +28,7 @@ namespace OpenPowerCfg.GUI
         private PersistentSettings settings;
         private SettingSubGroup subGroup;
         private Guid schemeGuid;
+        private bool valid;
 
         public SubGroupNode(Guid schemeGuid, Guid subGroupGuid, PersistentSettings settings)
         {
@@ -35,6 +36,9 @@ namespace OpenPowerCfg.GUI
             this.schemeGuid = schemeGuid;
             this.subGroup = new SettingSubGroup();
             this.subGroup.Guid = subGroupGuid.ToString();
+            this.subGroup.Name = "INVALID";
+            this.subGroup.Description = "INVALID";
+            this.valid = false;
 
             IntPtr friendlyName = Marshal.AllocHGlobal(1000);
             IntPtr powerSchemeGuidPtr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(Guid)));
@@ -48,14 +52,20 @@ namespace OpenPowerCfg.GUI
 
                 //Pass the guid retrieved in PowerEnumerate as 
                 //parameter to get the sub group name.
-                NativeMethods.PowerReadFriendlyName(IntPtr.Zero,
-                    powerSchemeGuidPtr, groupGuidPtr, IntPtr.Zero, friendlyName, ref bufferSize);
+                this.valid = (NativeMethods.PowerReadFriendlyName(IntPtr.Zero,
+                    powerSchemeGuidPtr, groupGuidPtr, IntPtr.Zero, friendlyName, ref bufferSize) == 0);
 
-                string subGroupName = Marshal.PtrToStringUni(friendlyName);
-                this.subGroup.Name = subGroupName;
+                if (this.valid)
+                {
+                    string subGroupName = Marshal.PtrToStringUni(friendlyName);
+                    this.subGroup.Name = subGroupName;
 
-                this.subGroup.Description = PowerManager.GetDescription(schemeGuid.ToString(), subGroup.Guid, null);
-
+                    this.subGroup.Description = PowerManager.GetDescription(schemeGuid.ToString(), subGroup.Guid, null);
+                }
+            }
+            catch (Exception exception)
+            {
+                this.valid = false;
             }
             finally
             {
@@ -77,11 +87,21 @@ namespace OpenPowerCfg.GUI
             get { return subGroup.Description; }
         }
 
+        public bool isValid()
+        {
+            return valid;
+        }
+
         protected override void LoadChilds()
         {
             IntPtr settingGuidPtr = IntPtr.Zero;
             IntPtr subGroupGuidPtr = IntPtr.Zero;
             IntPtr powerSchemeGuidPtr = IntPtr.Zero;
+
+            if (!this.valid)
+            {
+                return;
+            }
 
             try
             {
