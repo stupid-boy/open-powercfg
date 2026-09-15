@@ -35,7 +35,7 @@ namespace OpenPowerCfg.GUI
 
             projectLinkLabel.Links.Remove(projectLinkLabel.Links[0]);
             projectLinkLabel.Links.Add(0, projectLinkLabel.Text.Length,
-                "http://code.google.com/p/open-powercfg/");
+                "https://github.com/stupid-boy/open-powercfg");
 
             licenseLinkLabel.Links.Remove(licenseLinkLabel.Links[0]);
             licenseLinkLabel.Links.Add(0, licenseLinkLabel.Text.Length,
