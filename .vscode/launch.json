@@ -1,0 +1,22 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": ".NET 3.0 Launch (console)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build-OpenPowerCfg",
+      "program": "${workspaceFolder}/Bin/Debug/netcoreapp3.0/OpenPowerCfg.exe",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "stopAtEntry": false,
+      "console": "internalConsole",
+      "logging": {
+        "engineLogging": false,
+        "trace": false,
+        "programOutput": true
+      },
+      "internalConsoleOptions": "openOnSessionStart"
+    }
+  ]
+}
